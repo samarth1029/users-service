@@ -13,7 +13,4 @@ import java.util.Optional;
 public class ResponseTemplateVO {
     private Users users;
     private Department department;
-
-    public void setUsers(Optional<Users> user) {
-    }
 }
