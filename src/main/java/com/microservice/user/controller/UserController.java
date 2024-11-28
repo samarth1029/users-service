@@ -1,7 +1,7 @@
 package com.microservice.user.controller;
 
 import com.microservice.user.VO.ResponseTemplateVO;
-import com.microservice.user.entity.User;
+import com.microservice.user.entity.Users;
 import com.microservice.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/")
-    public User saveUser(@RequestBody User user){
+    public Users saveUser(@RequestBody Users users){
         log.info("Inside saveUser controller");
-        return userService.saveUser(user);
+        return userService.saveUser(users);
     }
 
     @GetMapping("{id}")

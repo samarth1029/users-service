@@ -2,7 +2,7 @@ package com.microservice.user.service;
 
 import com.microservice.user.VO.Department;
 import com.microservice.user.VO.ResponseTemplateVO;
-import com.microservice.user.entity.User;
+import com.microservice.user.entity.Users;
 import com.microservice.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,19 @@ public class UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public User saveUser(User user) {
+    public Users saveUser(Users users) {
         log.info("Inside saveUser service");
-        return userRepository.save(user);
+        return userRepository.save(users);
     }
 
     public ResponseTemplateVO getUserAndDepartment(Long userId) {
         log.info("Inside getUserAndDepartment service");
         ResponseTemplateVO vo = new ResponseTemplateVO();
-        Optional<User> user = userRepository.findById(userId);
+        Optional<Users> user = userRepository.findById(userId);
         Department department =
                 restTemplate.getForObject("http://localhost:9092/departments/" + user.get().getDepartmentId()
                         ,Department.class);
-        vo.setUser(user);
+        vo.setUsers(user);
         vo.setDepartment(department);
         return vo;
     }

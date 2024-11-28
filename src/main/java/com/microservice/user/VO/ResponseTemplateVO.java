@@ -1,6 +1,6 @@
 package com.microservice.user.VO;
 
-import com.microservice.user.entity.User;
+import com.microservice.user.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseTemplateVO {
-    private User user;
+    private Users users;
     private Department department;
 
-    public void setUser(Optional<User> user) {
+    public void setUsers(Optional<Users> user) {
     }
 }
