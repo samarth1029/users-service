@@ -28,12 +28,20 @@ public class UserService {
     public ResponseTemplateVO getUserAndDepartment(Long userId) {
         log.info("Inside getUserAndDepartment service");
         ResponseTemplateVO vo = new ResponseTemplateVO();
-        Optional<Users> user = userRepository.findById(userId);
-        Department department =
-                restTemplate.getForObject("http://localhost:9092/departments/" + user.get().getDepartmentId()
-                        ,Department.class);
-        vo.setUsers(user);
-        vo.setDepartment(department);
+        Optional<Users> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            Users user = optionalUser.get();
+            Department department = restTemplate.getForObject(
+                    "http://localhost:9092/departments/" + user.getDepartmentId(),
+                    Department.class
+            );
+
+            vo.setUsers(user);
+            vo.setDepartment(department);
+        } else {
+            log.error("User with ID " + userId + " not found");throw new RuntimeException("User not found with ID: " + userId);
+        }
+
         return vo;
     }
 }
