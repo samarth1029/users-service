@@ -32,7 +32,7 @@ public class UserService {
         if (optionalUser.isPresent()) {
             Users user = optionalUser.get();
             Department department = restTemplate.getForObject(
-                    "http://localhost:9092/departments/" + user.getDepartmentId(),
+                    "http://DEPARTMENT-SERVICE/departments/" + user.getDepartmentId(),
                     Department.class
             );
 
